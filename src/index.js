@@ -21,6 +21,8 @@ const nickName = observable({
     this.age--;
   }
 });
+
+const todos = observable([{ text: "Learn React" }, { text: "Learn MobX" }]);
 @observer
 class Counter extends React.Component {
   handleDecrement = () => {
@@ -32,17 +34,17 @@ class Counter extends React.Component {
   render() {
     return (
       <div className="App">
-        {/* <DevTools /> */}
-        <h1>{this.props.store.nickName}</h1>
-        <h1>{this.props.store.age}</h1>
-        <button onClick={this.handleDecrement}>-1</button>
-        <button onClick={this.handleIncrement}>+1</button>
+        <ul>
+          {todos.map(({ text }) => {
+            return <li key={text}>{text}</li>;
+          })}
+        </ul>
       </div>
     );
   }
 }
 
-ReactDOM.render(<Counter store={nickName} />, document.getElementById("root"));
+ReactDOM.render(<Counter store={todos} />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
